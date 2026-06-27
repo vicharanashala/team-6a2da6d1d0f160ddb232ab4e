@@ -1,7 +1,7 @@
-# Project Context — Shamagama FAQ & Community Platform
+# Project Context — Samagama FAQ & Community Platform
 
 > Semantic search-powered FAQ and community Q&A platform targeting **10,00,000 users (10 lakh / 1 million)**.
-> Project name: **Shamagama** (also known internally as "yaksha-faq-portal").
+> Project name: **Samagama** (also known internally as "yaksha-faq-portal").
 
 ---
 
