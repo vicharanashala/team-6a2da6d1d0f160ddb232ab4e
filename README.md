@@ -2,8 +2,8 @@
 
 **Team:** team-6a2da6d1d0f160ddb232ab4e | Vicharanashala Internship 2026
 
-**Priyanjali Chaudhary** | JUIT Solan / IIT Madras | VINS @ IIT Ropar
-Supervised by Dr. Shruti Jain & Dr. Harsh Sohal
+**Priyanjali Chaudhary** | VINS @ IIT Ropar
+
 
 > Built on top of [vicharanashala/crowd-source-faq](https://github.com/vicharanashala/crowd-source-faq) (MIT License) with an original team contribution: the **FAQ Journey Health Map** feature.
 
