@@ -18,8 +18,8 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
 import api from '../../utils/api';
-import { JOURNEY_STAGE_ORDER } from '../../journey.types';
-import { JOURNEY_STAGE_LABELS } from '../components/faq/JourneyStageSelector';
+import { JOURNEY_STAGE_ORDER } from "../../types/journey.types";
+import { JOURNEY_STAGE_LABELS } from "../../components/faq/JourneyStageSelector";
 import type { JourneyStage } from '../../journey.types';
 
 interface AdminFAQRow {
@@ -52,8 +52,8 @@ export default function AdminJourneyMap() {
   useEffect(() => {
     setLoading(true);
     api
-      .get<{ ok: boolean; data: { faqs: AdminFAQRow[] } }>('/api/admin/faqs?limit=500&select=journey')
-      .then((r) => setFaqs(r.data.data.faqs))
+      .get<any>('/admin/faqs?limit=500')
+      .then((r) => setFaqs(r.data.faqs || r.data.data?.faqs || []))
       .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
@@ -88,7 +88,7 @@ export default function AdminJourneyMap() {
       if (!edit) return;
       setSaving((prev) => new Set(prev).add(id));
       try {
-        await api.patch(`/api/faq/${id}`, {
+        await api.patch(`/admin/faq/${id}`, {
           journeyStage: edit.journeyStage,
           journeyOrder: edit.journeyOrder,
           issueFlags: edit.issueFlags,
@@ -115,7 +115,7 @@ export default function AdminJourneyMap() {
     setSyncResult(null);
     try {
       const r = await api.post<{ ok: boolean; updated: number; maxClicks: number }>(
-        '/api/admin/faq/heat-sync'
+        '/admin/faq/heat-sync'
       );
       setSyncResult(`✓ Updated ${r.data.updated} FAQs. Max clicks this window: ${r.data.maxClicks}`);
       // Refresh heat scores

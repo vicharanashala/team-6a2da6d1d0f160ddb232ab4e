@@ -70,6 +70,7 @@ const NAV: NavGroup[] = [
     items: [
       { to: '/admin/settings/ai',    label: 'AI Settings',   icon: BrainIcon },
       { to: '/admin/features',      label: 'Feature Flags', icon: FlagIcon },
+      { to: '/admin/journey-map',   label: 'Journey Map',   icon: DocIcon },
       { to: '/admin/settings',       label: 'Settings',      icon: SettingsIcon },
     ],
   },

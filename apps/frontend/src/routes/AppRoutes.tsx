@@ -52,6 +52,7 @@ const AdminSupportAnalytics = lazy(() => import('../admin/pages/AdminSupportAnal
 const AdminSupportCategories = lazy(() => import('../admin/pages/AdminSupportCategories'));
 const AdminGoldenTickets = lazy(() => import('../admin/pages/AdminGoldenTickets'));
 const AdminFeatures = lazy(() => import('../admin/pages/AdminFeatures'));
+const AdminJourneyMap = lazy(() => import('../admin/pages/AdminJourneyMap'));
 const AdminWelcomePage = lazy(() => import('../admin/pages/AdminWelcomePage'));
 const AdminZoomAssessmentsPage = lazy(() => import('../admin/pages/AdminZoomAssessmentsPage'));
 const AdminZoomQuestionsPage = lazy(() => import('../admin/pages/AdminZoomQuestionsPage'));
@@ -167,7 +168,7 @@ export default function AppRoutes() {
             <Route index element={<AdminGoldenTickets />} />
           </Route>
           <Route path="/admin/features" element={<AdminRoute><AdminLayout><AdminFeatures /></AdminLayout></AdminRoute>} />
-
+          <Route path="/admin/journey-map" element={<AdminRoute><AdminLayout><AdminJourneyMap /></AdminLayout></AdminRoute>} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

@@ -15,9 +15,8 @@
  */
 
 import React from 'react';
-import { JOURNEY_STAGE_ORDER } from '../../journey.types';
-import type { JourneyStage } from '../../journey.types';
-
+import { JOURNEY_STAGE_ORDER } from '../../types/journey.types';
+import type { JourneyStage } from '../../types/journey.types';
 const STAGE_LABELS: Record<JourneyStage, string> = {
   pre_application: 'Before you apply',
   interview:       'The Yaksha interview',

@@ -26,9 +26,9 @@ import type {
   JourneyFilter,
   FeedbackVote,
   HealthStatus,
-} from '../../journey.types';
-import { HEALTH_COLORS } from '../../journey.types';
-import { FreshnessBadge } from './FreshnessBadge';
+} from '../../types/journey.types';
+import { HEALTH_COLORS } from '../../types/journey.types';
+
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
@@ -188,13 +188,7 @@ function FAQCard({ faq, voted, onVote, searchTerm }: FAQCardProps) {
             </div>
           ))}
 
-          {/* Freshness badge if present */}
-          {faq.freshnessStatus && faq.freshnessStatus !== 'verified' && (
-            <div className="mb-3">
-              <FreshnessBadge status={faq.freshnessStatus} />
-            </div>
-          )}
-
+          
           {/* Footer: heat bar + feedback */}
           <div className="flex items-center gap-3 mt-3 pt-3 border-t border-gray-100 dark:border-gray-800">
             <span className="text-xs text-gray-400">Asked by</span>
@@ -403,11 +397,11 @@ export function JourneyHealthMap({ batchId, className = '' }: JourneyHealthMapPr
       </div>
 
       {/* Error state */}
-      {error && (
-        <div className="text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950
-                        rounded-xl px-4 py-3 mb-4">
-          {error}
-        </div>
+      {error && !error.includes('ENOENT') && (
+       <div className="text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950
+                  rounded-xl px-4 py-3 mb-4">
+       {error}
+      </div>
       )}
 
       {/* Timeline */}

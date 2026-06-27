@@ -16,6 +16,7 @@ import { HomeDoodles } from '../components/ui/PageDoodles';
 import api, { friendlyError } from '../utils/api';
 import type { TrendingQuery } from '../types/ui';
 import { useBatch } from '../context/BatchContext';
+import { JourneyHealthMap } from '../components/faq/JourneyHealthMap';
 
 // Modular FAQ components — shared utilities
 import {
@@ -54,7 +55,7 @@ export default function FAQPage() {
   const [searchLoading, setSearchLoading] = useState(false);
   const [sortOption, setSortOption] = useState('relevant');
   const [visibleCount, setVisibleCount] = useState(8);
-
+  const [view, setView] = useState<'categories' | 'journey'>('categories');
   const searchBarRef = useRef<HTMLInputElement>(null);
   const [resultFaqId, setResultFaqId] = useState<string | undefined>(undefined);
   const { id: urlFaqId } = useParams<string>();
@@ -312,6 +313,21 @@ export default function FAQPage() {
         </section>
 
         {/* ─── CATEGORY FILTER PILLS ─────────────────────────────────── */}
+        {/* ─── VIEW SWITCHER ─────────────────────────────────────────── */}
+<div className="flex justify-center gap-2 mt-4 mb-2">
+  <button
+    onClick={() => setView('categories')}
+    className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition-all ${view === 'categories' ? 'bg-accent text-accent-text border-accent/60' : 'bg-card text-ink border-border/70 hover:bg-cream'}`}
+  >
+    Browse by category
+  </button>
+  <button
+    onClick={() => setView('journey')}
+    className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition-all ${view === 'journey' ? 'bg-accent text-accent-text border-accent/60' : 'bg-card text-ink border-border/70 hover:bg-cream'}`}
+  >
+    🗺 Journey map
+  </button>
+</div>
         {!loading && !error && !activeQuestion && !searchActive && categories.length > 0 && (
           <nav
             className="mt-3 max-w-5xl mx-auto px-1 flex flex-wrap justify-center gap-2"
@@ -459,7 +475,7 @@ export default function FAQPage() {
         )}
 
         {/* ─── DEFAULT STATE: CATEGORY-WISE CARDS GRID ──────────────── */}
-        {!loading && !error && !activeQuestion && !searchActive && !activeCategory && (
+       {!loading && !error && !activeQuestion && !searchActive && !activeCategory && view === 'categories' && (
           <section className="max-w-6xl mx-auto mt-10">
             <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {categories.map((cat) => {
@@ -548,6 +564,12 @@ export default function FAQPage() {
             </div>
           </section>
         )}
+       {/* ─── JOURNEY MAP VIEW ─────────────────────────────────────── */}
+         {!activeQuestion && !searchActive && view === 'journey' && (
+         <section className="max-w-3xl mx-auto mt-6">
+         <JourneyHealthMap />
+        </section>
+      )}
       </main>
 
       <Footer />

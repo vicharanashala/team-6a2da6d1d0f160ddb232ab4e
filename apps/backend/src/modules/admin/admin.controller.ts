@@ -298,13 +298,16 @@ export const rejectFAQ = async (req: Request, res: Response): Promise<void> => {
 // PUT /api/admin/faq/:id
 export const updateFAQ = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { question, answer, category, status, tags } = req.body as {
-      question?: string;
-      answer?: string;
-      category?: string;
-      status?: string;
-      tags?: string[];
-    };
+    const { question, answer, category, status, tags, journeyStage, journeyOrder, issueFlags } = req.body as {
+  question?: string;
+  answer?: string;
+  category?: string;
+  status?: string;
+  tags?: string[];
+  journeyStage?: string;
+  journeyOrder?: number;
+  issueFlags?: string[];
+};
 
     const faq = await FAQ.findById(req.params.id);
     if (!faq) {
@@ -317,6 +320,10 @@ export const updateFAQ = async (req: Request, res: Response): Promise<void> => {
     if (category) faq.category = sanitizeHtml(category);
     if (status) faq.status = status as any;
     if (tags) faq.tags = tags;
+    if (journeyStage !== undefined) (faq as any).journeyStage = journeyStage;
+    if (journeyOrder !== undefined) (faq as any).journeyOrder = journeyOrder;
+    if (issueFlags !== undefined) (faq as any).issueFlags = issueFlags;
+    await faq.save();
 
     // Recalculate embedding if key fields updated
     if (question || answer || category) {

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { getAllFAQs, getFAQById, getRecentFAQs, createFAQ, updateFAQ, deleteFAQ, checkFAQMatch, getPaginatedFAQs, submitFeedback, reportFAQ, getFAQHistory, createFAQSuggestion } from './faq.controller.js';
+import { getJourneyMap, submitJourneyFeedback, recalculateHeatScores } from './journey.controller.js';
 import { flagFAQ, voteReview } from './freshness.controller.js';
 import { protect, authorize } from '../../middleware/auth.js';
 import { validateBody, createFAQSchema, updateFAQSchema, flagFAQSchema, voteReviewSchema } from '../../utils/auth/validation.js';
@@ -15,6 +16,9 @@ router.get('/paginated', getPaginatedFAQs);
 // GET /api/faq/recent — Recent approved FAQs (public, used by HomePage)
 // MUST be registered before /:id route so Express doesn't treat "recent" as an id
 router.get('/recent', getRecentFAQs);
+router.get('/journey', getJourneyMap);
+router.post('/journey/heat-sync', protect, authorize('admin'), recalculateHeatScores);
+router.post('/:id/journey-feedback', submitJourneyFeedback);
 
 // POST /api/faq/check-match — Check if a question already exists in the FAQ (before posting on community)
 router.post('/check-match', protect, checkFAQMatch);

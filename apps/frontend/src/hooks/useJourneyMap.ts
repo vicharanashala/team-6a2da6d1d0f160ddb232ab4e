@@ -52,7 +52,7 @@ export function useJourneyMap(batchId?: string): UseJourneyMapReturn {
     if (batchId) params.set('batchId', batchId);
 
     api
-      .get<{ ok: boolean; data: JourneyMapPayload }>(`/api/faq/journey?${params}`)
+      .get<{ ok: boolean; data: JourneyMapPayload }>(`/faq/journey?${params}`)
       .then((res) => {
         if (!cancelled) setData(res.data.data);
       })

@@ -296,6 +296,20 @@ const faqSchema = new MongooseSchema(
     wordCount:          { type: Number, default: 0 },
     expectedReadMs:     { type: Number, default: 0 },
     popularityUpdatedAt:{ type: Date, default: null },
+    // ── Journey Health Map fields ───────────────────────────────────────────
+    journeyStage: {
+      type: String,
+      enum: [
+        'pre_application', 'interview', 'result_offer', 'noc_paperwork',
+        'day_one', 'phase1_vibe', 'team_formation', 'phase2_project', 'completion',
+      ],
+      default: 'pre_application',
+    },
+    journeyOrder:  { type: Number, default: 0 },
+    heatScore:     { type: Number, default: 0 },
+    issueFlags:    { type: [String], default: [] },
+    helpfulCount:  { type: Number, default: 0 },
+    flagCount:     { type: Number, default: 0 },
   },
   { timestamps: true }
 );
