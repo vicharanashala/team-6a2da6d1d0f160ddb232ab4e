@@ -1,6 +1,6 @@
 # Samagama — Yaksha FAQ Portal
 
-## Team 6a2da6d — FAQ Crowdsourcing Project
+## team-6a2da6d1d0f160ddb232ab4e — FAQ Crowdsourcing Project
 
 **Priyanjali Chaudhary** | Vicharanashala Internship 2026| VINS @ IIT Ropar
 
